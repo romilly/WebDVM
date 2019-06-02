@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web DVM</title>
+</head>
+<body>
+<h1>Web DVM - 6 Analog Channels</h1>
+<div>A0: <span id="A0"></span></div>
+<div>A1: <span id="A1"></span></div>
+<div>A2: <span id="A2"></span></div>
+<div>A3: <span id="A3"></span></div>
+<div>A4: <span id="A4"></span></div>
+<div>A5: <span id="A5"></span></div>
+<script>
+
+
+  // setup websocket with callbacks
+
+  var ws = new WebSocket('ws://dvm:8080/');
+  ws.onopen = function() {
+  };
+  ws.onclose = function() {
+  };
+  ws.onmessage = function(event) {
+      data = event.data.split('=');
+      if (data[0].length === 2) {
+          document.getElementById(data[0]).textContent = data[1];
+      }
+  };
+</script>
+</body>
+</html>
