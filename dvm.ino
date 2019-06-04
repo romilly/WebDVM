@@ -1,7 +1,7 @@
 const float vcc = 5.0;
 const float scale = vcc / 1023; 
 const int analogPins[] = {A0, A1, A2, A3, A4, A5};
-const int delay_ms = 50;
+const int delay_ms = 50; # 20 samples/sec
 const int channels = 6;
 
 // 6 Channel DVM over serial connection
