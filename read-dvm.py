@@ -6,7 +6,12 @@ import sys
 
 TIMEOUT_SECONDS = 1
 
-with serial.Serial('/dev/ttyACM0', 9600, timeout=TIMEOUT_SECONDS) as ser:
+ports = [port for port in ['/dev/ttyACM0','/dev/ttyUSB0'] if port in serial.tools.list_ports.comports() ]
+if len(ports) != 1:
+    raise Exception('cannot identify port to use')
+port = ports[0]
+
+with serial.Serial(port, 9600, timeout=TIMEOUT_SECONDS) as ser:
     # We use a Bi-directional BufferedRWPair so people who copy + adapt can write as well as read
     sio = io.TextIOWrapper(io.BufferedRWPair(ser, ser))
     while True:
