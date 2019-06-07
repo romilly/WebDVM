@@ -3,10 +3,12 @@
 import serial
 import io
 import sys
+from serial.tools import list_ports
 
 TIMEOUT_SECONDS = 1
 
-ports = [port for port in ['/dev/ttyACM0','/dev/ttyUSB0'] if port in serial.tools.list_ports.comports() ]
+devices = [port.device for port in list_ports.comports()]
+ports = [port for port in devices if port in ['/dev/ttyACM0','/dev/ttyUSB0']]
 if len(ports) != 1:
     raise Exception('cannot identify port to use')
 port = ports[0]
