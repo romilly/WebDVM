@@ -21,7 +21,6 @@ with serial.Serial(port, 9600, timeout=TIMEOUT_SECONDS) as ser:
             line = sio.readline()
         except UnicodeDecodeError:
             continue # decode error - keep calm and carry on
-        if len(line) == 0: # EOF
-            break
-        print(line)
+        if len(line) > 0:
+            print(line)
         sys.stdout.flush() # to avoid buffering, needed for websocketd
